@@ -1,7 +1,7 @@
 import React, {
 	Component
 } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 const articlesItems = [{
@@ -46,8 +46,8 @@ class ShowArticlesList extends Component {
 	          <td>{item.updated_at}</td>
 	          <td>
 	              <a href='#'
-	                  onClick={() => this.props.changeAppMode('update', item.id)}
-	                  className='btn btn-primary m-r-1em'> Edit
+	                  onClick={() => this.props.changeAppMode('detail', item.id)}
+	                  className='btn btn-primary m-r-1em'> Detail
 	              </a>
 	              <a
 	                  onClick={() => this.props.changeAppMode('delete', item.id)}
@@ -67,8 +67,10 @@ class ShowArticlesList extends Component {
                    <div className="card p-3">
                      <div className="">
                        <input type="text" id="myInput" placeholder="Author,Tags"></input>
-                       <button  onClick={() => this.props.changeAppMode('search') } className="btn btn-info">Search</button>
-                       <button  onClick={() => this.props.changeAppMode('add') } className="btn btn-primary">Add Articles</button>
+                       <button  onClick={() => this.props.changeAppMode('search') }
+                        className="btn btn-info">Search</button>
+                       <button  onClick={() => this.props.changeAppMode('add') }
+                        className="btn btn-primary">Add Article</button>
                      </div>
                      <table className="table table-bordered table-hover">
                        <tbody>
