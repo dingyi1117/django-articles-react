@@ -1,98 +1,78 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {
+  Component
+} from 'react';
+//import logo from './logo.svg';
 import './App.css';
+import ShowArticlesList from './show_articlesList';
+import AddArticle from './add_article';
+import ArticleDetail from './article_detail';
 
-const articlesItems =[
-  {
-    id:1,
-    title:'aaa',
-    description:'aaa',
-    author:'aaa',
-    tags:'a,a,a',
-    created_at:'2019-01-22 10:50:23',
-    updated_at:'2019-01-22 10:50:23'
-  }
-]
+/* eslint-disable */
+const articlesItems = [{
+  id: 1,
+  title: 'aaa',
+  description: 'aaa',
+  author: 'aaa',
+  tags: 'a,a,a',
+  created_at: '2019-01-22 10:50:23',
+  updated_at: '2019-01-22 10:50:23'
+}, {
+  id: 2,
+  title: 'aaa',
+  description: 'aaa',
+  author: 'aaa',
+  tags: 'a,a,a',
+  created_at: '2019-01-22 10:50:23',
+  updated_at: '2019-01-22 10:50:23'
+}];
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewCompleted: false,
-      todoList: todoItems
+      articlesList: articlesItems,
+      currentMode: 'show',
+      productId: null
     };
-  }
+  };
 
-  displayCompleted = status => {
-    if (status) {
-      return this.setState({ viewCompleted: true });
+  changeAppMode = (newMode, productId) => {
+    this.setState({
+      currentMode: newMode
+    });
+    if (productId !== undefined) {
+      this.setState({
+        productId: productId
+      });
     }
-    return this.setState({ viewCompleted: false });
   };
 
-  renderTabList = () => {
-    return (
-      <div className="my-5 tab-list">
-        <span
-          onClick={() => this.displayCompleted(true)}
-          className={this.state.viewCompleted ? "active" : ""}
-        >
-          complete
-        </span>
 
-        <span
-          onClick={() => this.displayCompleted(false)}
-          className={this.state.viewCompleted ? "" : "active"}
-        >
-          Incomplete
-        </span>
-      </div>
-    );
-  };
-  renderItems = () => {
-    const { viewCompleted } = this.state;
-    const newItems = this.state.todoList.filter(
-      item => item.completed == viewCompleted
-    );
-    return newItems.map(item => (
-      <li
-        key={item.id}
-        className="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span
-          className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
-          }`}
-          title={item.description}
-        >
-          {item.title}
-        </span>
-        <span>
-          <button className="btn btn-secondary mr-2"> Edit </button>
-          <button className="btn btn-danger">Delete </button>
-        </span>
-      </li>
-    ));
-  };
   render() {
-    return (
-      <main className="content">
-        <h1 className="text-white text-uppercase text-center my-4">Todo app</h1>
-        <div className="row ">
-          <div className="col-md-6 col-sm-10 mx-auto p-0">
-            <div className="card p-3">
-              <div className="">
-                <button className="btn btn-primary">Add task</button>
-              </div>
-              {this.renderTabList()}
-              <ul className="list-group list-group-flush">
-                {this.renderItems()}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
+    var modeComponent =
+      <ShowArticlesList
+            changeAppMode={this.changeAppMode}/>;
+
+    switch (this.state.currentMode) {
+      case 'show':
+        break;
+      case 'detail':
+        modeComponent = <ShowArticlesList productId={this.state.productId} changeAppMode={this.changeAppMode}/>;
+        break;
+      case 'add':
+        modeComponent = <AddArticle changeAppMode={this.changeAppMode}/>;
+        break;
+      case 'update':
+        modeComponent = <ArticleDetail changeAppMode={this.changeAppMode} productId={this.state.productId} />;
+        break;
+      case 'delete':
+        modeComponent = <ArticleDetail changeAppMode={this.changeAppMode} productId={this.state.productId}/>;
+        break;
+      default:
+        break;
+    }
+
+    return modeComponent;
   }
 }
 export default App;
