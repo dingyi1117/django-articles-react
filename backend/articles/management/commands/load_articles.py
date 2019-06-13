@@ -3,7 +3,7 @@ import datetime,re
 from django.core.management import BaseCommand
 from articles.models import Article
 
-def format_date(strdate,id):
+def check_format_date(strdate,id):
     listdate= list(filter(None,re.split('[/.-]',strdate)))
     format =''
     try:
@@ -31,12 +31,13 @@ class Command(BaseCommand):
             fields_name = next(reader)
             for row in reader:
                 article = Article.objects. get_or_create(
+                    id = row[0],
                     title=row[1],
                     description=row[2],
                     author=row[3],
                     tags=row[4],
-                    created_at= format_date(row[5],row[0]),
-                    updated_at= format_date(row[6],row[0])
+                    created_at= check_format_date(row[5],row[0]),
+                    updated_at= check_format_date(row[6],row[0])
                 )
 
     

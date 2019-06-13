@@ -7,8 +7,8 @@ class Article(models.Model):
     description = models.TextField()
     author = models.CharField(max_length=120)
     tags = models.CharField(max_length=300)
-    created_at =  models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at =  models.DateField()
+    updated_at = models.DateField()
 
     def _str_(self):
         return self.title
