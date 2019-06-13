@@ -1,36 +1,33 @@
 import React, {
 	Component
 } from 'react';
-//import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
 
-const articlesItems = [{
-	id: 1,
-	title: 'aaa',
-	description: 'aaa',
-	author: 'aaa',
-	tags: 'a,a,a',
-	created_at: '2019-01-22 10:50:23',
-	updated_at: '2019-01-22 10:50:23'
-}, {
-	id: 2,
-	title: 'aaa',
-	description: 'aaa',
-	author: 'aaa',
-	tags: 'a,a,a',
-	created_at: '2019-01-22 10:50:23',
-	updated_at: '2019-01-22 10:50:23'
-}];
 
 class ShowArticlesList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			articlesList: articlesItems,
+			articlesList: [],
 			currentMode: 'read',
 			productId: null
 		};
 	};
+
+
+	componentDidMount = () => {
+		this.refreshTable();
+	}
+
+	refreshTable = () => {
+		axios
+			.get("/api/articles")
+			.then(res => this.setState({
+				articlesList: res.data
+			}))
+			.catch(err => console.log(err))
+	}
 
 
 	renderItems() {
@@ -48,6 +45,10 @@ class ShowArticlesList extends Component {
 	              <a href='#'
 	                  onClick={() => this.props.changeAppMode('detail', item.id)}
 	                  className='btn btn-primary m-r-1em'> Detail
+	              </a>
+	              <a
+	                  onClick={() => this.props.changeAppMode('update', item.id)}
+	                  className='btn btn-primary m-r-1em'> Update
 	              </a>
 	              <a
 	                  onClick={() => this.props.changeAppMode('delete', item.id)}
@@ -69,7 +70,7 @@ class ShowArticlesList extends Component {
                        <input type="text" id="myInput" placeholder="Author,Tags"></input>
                        <button  onClick={() => this.props.changeAppMode('search') }
                         className="btn btn-info">Search</button>
-                       <button  onClick={() => this.props.changeAppMode('add') }
+                       <button  onClick={() => this.props.changeAppMode('create') }
                         className="btn btn-primary">Add Article</button>
                      </div>
                      <table className="table table-bordered table-hover">

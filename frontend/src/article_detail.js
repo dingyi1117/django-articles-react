@@ -2,22 +2,14 @@ import React, {
 	Component
 } from 'react';
 import './App.css';
+import axios from "axios";
 
-const article = {
-	id: 1,
-	title: 'aaa',
-	description: 'aaa',
-	author: 'aaa',
-	tags: 'a,a,a',
-	created_at: '2019-01-22 10:50:23',
-	updated_at: '2019-01-22 10:50:23'
-}
 
 class ArticleDetail extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: this.props.prodectId,
+			id: 0,
 			title: '',
 			description: '',
 			author: '',
@@ -29,15 +21,19 @@ class ArticleDetail extends Component {
 
 
 	componentDidMount = () => {
-		this.setState({
-			id: article.id,
-			title: article.title,
-			description: article.description,
-			author: article.author,
-			tags: article.tags,
-			created_at: article.created_at,
-			updated_at: article.updated_at
-		})
+		axios
+			.get(`/api/articles/${this.props.productId}`)
+			.then(res => {
+				this.setState({
+					title: res.data.title,
+					author: res.data.author,
+					description: res.data.description,
+					tags: res.data.tags,
+					created_at: res.data.created_at,
+					updated_at: res.data.updated_at
+				});
+			})
+			.catch(err => console.log(err))
 	};
 
 	render() {

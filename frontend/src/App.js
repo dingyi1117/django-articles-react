@@ -4,8 +4,9 @@ import React, {
 //import logo from './logo.svg';
 import './App.css';
 import ShowArticlesList from './show_articlesList';
-import AddArticle from './add_article';
+import CreateArticle from './create_article';
 import ArticleDetail from './article_detail';
+import UpdateArticle from './update_article'
 
 /* eslint-disable */
 
@@ -37,11 +38,14 @@ class App extends Component {
       case 'detail':
         modeComponent = <ArticleDetail productId={this.state.productId} changeAppMode={this.changeAppMode}/>;
         break;
-      case 'add':
-        modeComponent = <AddArticle changeAppMode={this.changeAppMode} currentMode = {this.state.currentMode}/>;
+      case 'create':
+        modeComponent = <CreateArticle changeAppMode={this.changeAppMode}/>;
+        break;
+      case 'update':
+        modeComponent = <UpdateArticle changeAppMode={this.changeAppMode} productId={this.state.productId}/>;
         break;
       case 'delete':
-        modeComponent = <ArticleDetail changeAppMode={this.changeAppMode} productId={this.state.productId}/>;
+        modeComponent = <DeleteArticle changeAppMode={this.changeAppMode} productId={this.state.productId}/>;
         break;
       default:
         break;
