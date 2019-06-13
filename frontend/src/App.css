@@ -18,6 +18,11 @@
   font-size: large;
 }
 
+.rt-th, .rt-td {
+  display: flex;
+  flex-direction: row;
+}
+
 
 
 @keyframes App-logo-spin {

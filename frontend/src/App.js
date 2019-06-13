@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import ShowArticlesList from './show_articlesList';
-import CreateArticle from './create_article';
+import ShowArticlesList from './articlesList_show';
+import CreateArticle from './article_create';
 import ArticleDetail from './article_detail';
-import UpdateArticle from './update_article';
-import DeleteArticle from './delete_article'
+import UpdateArticle from './article_update';
+import DeleteArticle from './article_delete';
 
 /* eslint-disable */
 

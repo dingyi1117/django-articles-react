@@ -1,24 +1,71 @@
 import React, {
     Component
 } from 'react';
-import './App.css';
 import axios from "axios";
-import DatePicker from "react-datepicker";
-import moment from "moment";
-import "react-datepicker/dist/react-datepicker.css";
+import './App.css';
+import moment from "moment"
 
-class CreateArticle extends Component {
+
+class UpdateArticle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: null,
+            id: this.props.prodectId,
             title: '',
             description: '',
             author: '',
             tags: '',
-            successCreation: "",
+            created_at: '',
+            updated_at: '',
+            successUpdate: '',
             date: new Date()
-        }
+        };
+    };
+
+
+    componentDidMount() {
+        axios
+            .get(`/api/articles/${this.props.productId}`)
+            .then(res => {
+                this.setState({
+                    title: res.data.title,
+                    author: res.data.author,
+                    description: res.data.description,
+                    tags: res.data.tags,
+                    created_at: res.data.created_at,
+                    updated_at: res.data.updated_at
+                });
+            })
+            .catch(err => console.log(err))
+    };
+
+    onSave = (e) => {
+        // data in the form
+        var form_data = {
+            id: this.props.productId,
+            title: this.state.title,
+            author: this.state.author,
+            description: this.state.description,
+            tags: this.state.tags,
+            created_at: this.state.created_at,
+            updated_at: moment(this.state.date).format('YYYY-MM-DD')
+        };
+
+        axios
+            .put(`/api/articles/${this.props.productId}/`, form_data)
+            .then(res => {
+                this.setState({
+                    successUpdate: "Success",
+                    updated_at: moment(this.state.date).format('YYYY-MM-DD')
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState({
+                    successUpdate: "Fail"
+                })
+            })
+        e.preventDefault();
     };
 
     onTitleChange = (e) => {
@@ -44,81 +91,31 @@ class CreateArticle extends Component {
             tags: e.target.value
         });
     };
-
-    onDateChange = (date) => {
-        this.setState({
-            date: date
-        });
-    }
-    // handle description change
-
-    // handle price change
-    onSave = (e) => {
-        // data in the form
-        var form_data = {
-            title: this.state.title,
-            author: this.state.author,
-            description: this.state.description,
-            tags: this.state.tags,
-            created_at: moment(this.state.date).format('YYYY-MM-DD'),
-            updated_at: moment(this.state.date).format('YYYY-MM-DD')
-        };
-
-        axios
-            .post("/api/articles/", form_data)
-            .then(res => {
-                this.props.changeAppMode("show");
-                this.setState({
-                    successCreation: "Accept",
-                    title: "",
-                    author: "",
-                    description: "",
-                    tags: ""
-                })
-            })
-            .catch(err => {
-                console.log(err);
-                this.setState({
-                    successCreation: "Fail"
-                })
-            })
-        e.preventDefault();
-    };
-
     render() {
-        /*
-        - tell the user if a product was created
-        - tell the user if unable to create product
-        - button to go back to products list
-        - form to create a product
-        */
         return (
-            <div>
-             {
- 
-            this.state.successCreation === "Accept"?
-                <div className='alert alert-success'>
-                    Product was saved.
-                </div>
-            : null
-        }
- 
-        {
- 
-            this.state.successCreation === "Fail" ?
-                <div className='alert alert-danger'>
-                    Unable to save product. Please try again.
-                </div>
-            : null
-        }
+            <main className="content">
+            {
+                this.state.successUpdate === "Success" ?
+                    <div className='alert alert-success'>
+                        Article was updated.
+                    </div>
+                : null
+            }
+            {
+                this.state.successUpdate === "Fail" ?
+                    <div className='alert alert-danger'>
+                        Unable to update Article. Please try again.
+                    </div>
+                : null
+            }
+              <h3 className="text-uppercase text-center my-3">Update Article</h3>
+               <div className="row">
+                 <div className="col-md-11 col-sm-12 mx-auto p-0" >
+                 <div className="">
+                       <button  onClick={() => this.props.changeAppMode('show') }
+                        className="btn btn-primary">Back to List</button>
+                     </div>
 
- 
-        <a href='#'
-            onClick={() => this.props.changeAppMode('show')}
-            className='btn btn-primary margin-bottom-1em'> Article List
-        </a>
- 
- 
         <form onSubmit={this.onSave}>
             <table className='table table-bordered table-hover'>
             <tbody>
@@ -173,17 +170,7 @@ class CreateArticle extends Component {
                     </td>
                 </tr>
                 <tr>
-                    <td>Create Date</td>
-                    <td>
-                      <DatePicker 
-                      selected={this.state.date} 
-                      onChange={this.onDateChange}
-                      value={this.state.date}
-                      readonly="readonly"/>  
-                    </td>
-                </tr>
-                <tr>
-                <td></td>
+                    <td></td>
                     <td>
                         <button
                         className='btn btn-primary'
@@ -193,9 +180,11 @@ class CreateArticle extends Component {
                 </tbody>
             </table>
         </form>
-    </div>
+</div>
+</div>
+        </main>
         );
     }
 }
 
-export default CreateArticle;
+export default UpdateArticle;

@@ -6,11 +6,14 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "cypress": "^3.3.1",
+    "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-datepicker": "^2.7.0",
     "react-dom": "^16.8.6",
     "react-scripts": "0.9.5",
+    "react-table": "^6.10.0",
     "reactstrap": "^8.0.0"
   },
   "devDependencies": {},
@@ -19,5 +22,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+
+  "scripts": {
+    "test": "cypress open",
+    "flush": "pipenv run python ./project/manage.py flush --no-input",
+    "e2e": "cypress open --project ./project/frontend/",
   }
+
 }

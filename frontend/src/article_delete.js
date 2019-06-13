@@ -25,7 +25,9 @@ class DeleteArticle extends Component {
     };
     render() {
         return (
-            <div className='row'>
+            <main className="content">
+            <h3 className="text-uppercase text-center my-3"></h3>
+            <div className='row' >
             <div className='col-md-3'></div>
             <div className='col-md-6'>
                 <div className='panel panel-default'>
@@ -42,6 +44,7 @@ class DeleteArticle extends Component {
             </div>
             <div className='col-md-3'></div>
         </div>
+        </main>
         );
     }
 

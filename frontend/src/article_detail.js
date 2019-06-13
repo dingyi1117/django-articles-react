@@ -42,12 +42,15 @@ class ArticleDetail extends Component {
 
 	render() {
 		return (
-			<div>
-            <a href='#'
-                onClick={() => this.props.changeAppMode('show')}
-                className='btn btn-primary margin-bottom-1em'>
-                Article list
-            </a>
+			<main className="content">
+            
+               <h3 className="text-uppercase text-center my-3">Article Detail</h3>
+               <div className="row">
+                 <div className="col-md-11 col-sm-12 mx-auto p-0" >
+                 <div className="">
+                       <button  onClick={() => this.props.changeAppMode('show') }
+                        className="btn btn-primary">Back to List</button>
+                     </div>
  
             <form onSubmit={this.onUpdate}>
                 <table className='table table-bordered table-hover'>
@@ -94,6 +97,8 @@ class ArticleDetail extends Component {
                 </table>
             </form>
         </div>
+        </div>
+        </main>
 		);
 	}
 }
