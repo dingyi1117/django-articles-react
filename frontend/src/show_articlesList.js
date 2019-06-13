@@ -67,9 +67,6 @@ class ShowArticlesList extends Component {
                  <div className="col-md-6 col-sm-10 mx-auto p-0">
                    <div className="card p-3">
                      <div className="">
-                       <input type="text" id="myInput" placeholder="Author,Tags"></input>
-                       <button  onClick={() => this.props.changeAppMode('search') }
-                        className="btn btn-info">Search</button>
                        <button  onClick={() => this.props.changeAppMode('create') }
                         className="btn btn-primary">Add Article</button>
                      </div>

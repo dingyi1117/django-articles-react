@@ -36,6 +36,10 @@ class ArticleDetail extends Component {
 			.catch(err => console.log(err))
 	};
 
+	onUpdate = () => {
+		this.props.changeAppMode('update', this.props.productId)
+	}
+
 	render() {
 		return (
 			<div>
@@ -45,7 +49,7 @@ class ArticleDetail extends Component {
                 Article list
             </a>
  
-            <form onSubmit={this.onSave}>
+            <form onSubmit={this.onUpdate}>
                 <table className='table table-bordered table-hover'>
                     <tbody>
                     <tr>
@@ -77,6 +81,14 @@ class ArticleDetail extends Component {
                         <td>Updated Date</td>
                         <td>{this.state.updated_at}</td>
                     </tr>
+                    <tr>
+                    <td></td>
+                    <td>
+                        <button
+                        className='btn btn-primary'
+                        onClick={ this.onUpdate}>Update</button>
+                    </td>
+                </tr>
  
                     </tbody>
                 </table>

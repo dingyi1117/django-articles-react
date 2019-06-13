@@ -183,7 +183,7 @@ class CreateArticle extends Component {
                     </td>
                 </tr>
                 <tr>
-                    <td></td>
+                <td></td>
                     <td>
                         <button
                         className='btn btn-primary'

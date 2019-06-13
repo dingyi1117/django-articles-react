@@ -2,6 +2,7 @@ import React, {
     Component
 } from 'react';
 import './App.css';
+import axios from "axios";
 
 class DeleteArticle extends Component {
     constructor(props) {
@@ -17,24 +18,10 @@ class DeleteArticle extends Component {
     onDelete = (e) => {
 
         // product to delete
-        var productId = this.props.productId;
-
-        /*
-           // submit form data to api
-           $.ajax({
-               url: "http://localhost/api/product/delete.php",
-               type : "POST",
-               contentType : 'application/json',
-               data : JSON.stringify({'id' : productId}),
-               success : function(response) {
-                   this.props.changeAppMode('read');
-               }.bind(this),
-               error: function(xhr, resp, text){
-                   // show error in console
-                   console.log(xhr, resp, text);
-             
-             */
-        this.props.changeAppMode('show');
+        axios
+            .delete(`/api/articles/${this.props.productId}`)
+            .then(res => this.props.changeAppMode('show'))
+            .catch(err => console.log(err))
     };
     render() {
         return (

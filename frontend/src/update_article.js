@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import axios from "axios";
 import './App.css';
+import moment from "moment"
 
 
 class UpdateArticle extends Component {
@@ -23,7 +24,6 @@ class UpdateArticle extends Component {
 
 
     componentDidMount() {
-        var article = {};
         axios
             .get(`/api/articles/${this.props.productId}`)
             .then(res => {
@@ -52,11 +52,10 @@ class UpdateArticle extends Component {
         };
 
         axios
-            .post("/api/articles/", form_data)
+            .put(`/api/articles/${this.props.productId}/`, form_data)
             .then(res => {
-                this.props.changeAppMode("show");
                 this.setState({
-                    successUpdate: "Accept",
+                    successUpdate: "Success",
                     updated_at: moment(this.state.date).format('YYYY-MM-DD')
                 })
             })

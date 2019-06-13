@@ -6,7 +6,8 @@ import './App.css';
 import ShowArticlesList from './show_articlesList';
 import CreateArticle from './create_article';
 import ArticleDetail from './article_detail';
-import UpdateArticle from './update_article'
+import UpdateArticle from './update_article';
+import DeleteArticle from './delete_article'
 
 /* eslint-disable */
 
