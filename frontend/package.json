@@ -22,12 +22,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-
-  "scripts": {
-    "test": "cypress open",
-    "flush": "pipenv run python ./project/manage.py flush --no-input",
-    "e2e": "cypress open --project ./project/frontend/",
   }
-
 }
