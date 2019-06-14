@@ -1,7 +1,6 @@
 import React, {
   Component
 } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import ShowArticlesList from './component/articlesList_show';
 import CreateArticle from './component/article_create';

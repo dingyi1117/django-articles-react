@@ -5,12 +5,15 @@ describe("Django REST framework -test frontend", () => {
     author: "yiding",
     description: 'test frontend',
     tags: "test,frontend",
-    created_at: '2019-6-13'
+    created_at: '2019-6-13',
+    updated_at: '2019-6-14'
   };
+
   before(() => {
-    cy.exec("npm run dev");
-    cy.exec("npm run flush");
+    cy.exec("yarn run start");
+    cy.exec("yarn run flush");
   });
+
   it("should be able to fill a web form", () => {
     cy.visit("/");
     cy
@@ -19,7 +22,7 @@ describe("Django REST framework -test frontend", () => {
       .should("have.value", article.title);
     cy
       .get('textarea[name="author"]')
-      .type(lead.author)
+      .type(artile.author)
       .should("have.value", article.author);
     cy
       .get('textarea[name="description"]')
@@ -35,7 +38,7 @@ describe("Django REST framework -test frontend", () => {
       .should("have.value", article.created_at);
     cy
       .get('input[name="updated_at"]')
-      .type(article.created_at)
+      .type(article.updated_at)
       .should("have.value", article.updated_at);
     cy.get("form").submit();
   });
