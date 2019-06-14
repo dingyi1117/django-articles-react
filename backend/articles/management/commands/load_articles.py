@@ -15,7 +15,7 @@ def check_format_date(strdate,id):
         valid_date = datetime.datetime.strptime(date2str, format).strftime('%Y-%m-%d')
         return valid_date
     except ValueError:
-        raise ValueError('invalid time of '+ id +':' + listdate)
+        raise ValueError('invalid time of '+ id +':' + date2str)
 
 
 class Command(BaseCommand):
