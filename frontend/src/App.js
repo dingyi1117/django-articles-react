@@ -1,7 +1,6 @@
 import React, {
   Component
 } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import ShowArticlesList from './component/articlesList_show';
 import CreateArticle from './component/article_create';
@@ -9,6 +8,15 @@ import ArticleDetail from './component/article_detail';
 import UpdateArticle from './component/article_update';
 import DeleteArticle from './component/article_delete';
 
+
+import {
+  configure
+} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({
+  adapter: new Adapter()
+});
 /* eslint-disable */
 
 class App extends Component {
